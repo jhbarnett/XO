@@ -8,8 +8,8 @@ var inquirer = require('inquirer')
 greeting()
 
 
-
 var board = [ '\n', '1', '2', '3', '\n', '4', '5', '6', '\n', '7', '8', '9', '\n']
+var turn = true
 
 
 function greeting(){
@@ -28,9 +28,13 @@ function greeting(){
 function makeMove(){
   inquirer.prompt({
     name: 'PlayerMove',
-    message: 'Enter Your Move: ,
+    message: 'Enter Your Move: ',
     validate: function(val){
-       
+      val = val.toString()
+      var i = board.indexOf(val)
+      turn ? board[i] = 'X' : board[i] = 'O'
+      turn = !turn
+      drawBoard()
     }
   })
 }
